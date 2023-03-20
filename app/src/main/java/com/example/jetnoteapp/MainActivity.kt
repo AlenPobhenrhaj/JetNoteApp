@@ -8,11 +8,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.jetnoteapp.data.NotesDataSource
+import com.example.jetnoteapp.model.Note
 import com.example.jetnoteapp.screen.NoteScreen
+import com.example.jetnoteapp.screen.NoteViewModel
 import com.example.jetnoteapp.ui.theme.JetNoteAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,7 +42,13 @@ class MainActivity : ComponentActivity() {
 
 @ExperimentalComposeUiApi
 @Composable
-fun NotesApp() {
+fun NotesApp(noteViewModel: NoteViewModel = viewModel()) {
 
-    NoteScreen(notes = NotesDataSource().loadNotes(), onAddNote = {}, onRemoveNote = {})
+    val notesList = noteViewModel.getAllNotes()
+
+    NoteScreen(
+        notes = notesList,
+        onAddNote = { noteViewModel.addNote(it) },
+        onRemoveNote = { noteViewModel.removeNote(it) }
+    )
 }
