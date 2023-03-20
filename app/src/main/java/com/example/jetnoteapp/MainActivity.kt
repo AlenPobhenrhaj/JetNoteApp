@@ -19,6 +19,8 @@ import com.example.jetnoteapp.model.Note
 import com.example.jetnoteapp.screen.NoteScreen
 import com.example.jetnoteapp.screen.NoteViewModel
 import com.example.jetnoteapp.ui.theme.JetNoteAppTheme
+import dagger.hilt.android.HiltAndroidApp
+
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class)
